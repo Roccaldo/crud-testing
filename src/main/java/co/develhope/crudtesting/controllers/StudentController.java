@@ -2,8 +2,10 @@ package co.develhope.crudtesting.controllers;
 
 import co.develhope.crudtesting.entities.Student;
 import co.develhope.crudtesting.services.StudentService;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +43,16 @@ public class StudentController {
         Optional<Student> optionalStudent = studentService.modifyStatus(id, working);
         if (optionalStudent.isPresent()) {
             return ResponseEntity.ok(optionalStudent.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/del/{id}")
+    public ResponseEntity<Student> delete(@PathVariable Long id) {
+        Student optionalStudent = studentService.delete(id);
+        if (optionalStudent != null) {
+            return ResponseEntity.ok(optionalStudent);
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -59,4 +59,8 @@ public class Student {
     public void setWorking(boolean working) {
         isWorking = working;
     }
+
+    public boolean isWorking() {
+        return isWorking;
+    }
 }

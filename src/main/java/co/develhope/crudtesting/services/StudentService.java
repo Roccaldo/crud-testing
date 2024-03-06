@@ -48,4 +48,14 @@ public class StudentService {
         }
         return studentOptional;
     }
+
+    public Student delete(Long id) {
+        Optional<Student> studentOptional = repo.findById(id);
+        if (studentOptional.isPresent()) {
+            repo.delete(studentOptional.get());
+            return studentOptional.get();
+        } else {
+            return null;
+        }
+    }
 }
